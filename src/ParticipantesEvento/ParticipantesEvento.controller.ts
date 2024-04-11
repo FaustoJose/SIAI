@@ -23,7 +23,13 @@ export class ParticipantesEventoController {
         if (!ParticipantesEventoFound) throw new NotFoundException('Este participante no existe.')
         return ParticipantesEventoFound
     }
-
+    @Get('Event/:id')
+    async getAllParticipantesEventoById(@Param('id') id: string ){
+        const ParticipantesEventoFound = await this.ParticipantesEventoService.getAllParticipantesEventoById(Number(id))
+        if (!ParticipantesEventoFound) throw new NotFoundException('Este participante no existe.')
+        return ParticipantesEventoFound
+    }
+    
     @Delete(':id')
     async deleteParticipantesEvento(@Param('id') id: string){
         try{

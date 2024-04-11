@@ -3,11 +3,11 @@ import { UsuarioModule } from './Usuarios/Usuario.module';
 import { PreguntasFrecuenteModule } from './PreguntasFrecuentes/PreguntasFrecuentes.module';
 import { RegistroEventoModule } from './RegistroEventos/RegistroEventos.module';
 import { ParticipantesEventoModule } from './ParticipantesEvento/ParticipantesEvento.module';
-import { RespuestasIndicadaModule } from './RespuestasIndicadas/RespuestasIndicadas.module';
-import { ListadoModule } from './Listados/Listados.module';
 import { hablarModule } from './hablar/hablar.module';
-
-
+import { NaturalNLPModule } from './NaturalNLP/NaturalNLP.module';
+import { ChatModule } from './OPEN_AI/OPEN_AI.module';
+import { CategoryModule } from './Category/Category.module';
+import { ProfesionModule } from './Profesion/Profesion.module';
 @Module({
   imports: [
 
@@ -15,9 +15,11 @@ import { hablarModule } from './hablar/hablar.module';
       PreguntasFrecuenteModule,
       RegistroEventoModule,
       ParticipantesEventoModule,
-      RespuestasIndicadaModule,
-      ListadoModule,
-      hablarModule
+      hablarModule,
+      NaturalNLPModule,
+      ChatModule,
+      CategoryModule,
+      ProfesionModule
             ],
   controllers: [],
   providers: [],

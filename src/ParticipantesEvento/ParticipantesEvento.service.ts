@@ -19,9 +19,18 @@ export class ParticipantesEventoService {
         })
     }
 
+    getAllParticipantesEventoById(event_id: number):Promise<ParticipantesEvento[]>{
+        return this.prisma.participantesEvento.findMany({
+            where:{
+                event_id
+            }
+        })
+    }
+
     createParticipantesEvento(data: ParticipantesEvento):Promise<ParticipantesEvento>{
+        const {profetion_id,event_id,participant_name} = data
         return this.prisma.participantesEvento.create({
-            data
+            data:{profetion_id,event_id,participant_name}
         })
     }
 

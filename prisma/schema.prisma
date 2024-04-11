@@ -3,7 +3,7 @@
 
 generator client {
   provider = "prisma-client-js"
-}
+} 
 
 datasource db {
   provider = "postgresql"
@@ -17,56 +17,48 @@ model Usuarios {
   email      String
   password   String
   role       String
-  respuestasIndicadas RespuestasIndicadas[]
+ 
 }
 
 // Definición de la tabla PreguntasFrecuentes
 model PreguntasFrecuentes {
   faq_id     Int     @id @default(autoincrement())
+  category_id  Int
   question    String
   answer      String
-  category    String
-  respuestasIndicadas RespuestasIndicadas[]
+  category  Category @relation(fields: [category_id], references: [category_id])
 }
 
+model Category{
+  category_id Int @id @default(autoincrement())
+  description String
+  preguntasFrecuentes PreguntasFrecuentes[]
+}
 // Definición de la tabla RegistroEventos
 model RegistroEventos {
   event_id       Int      @id @default(autoincrement())
   event_name     String
   event_date     DateTime
   event_location String
+  participantesEvento ParticipantesEvento[] 
+  
+}
+
+model Profesion{
+  profetion_id  Int      @id @default(autoincrement())
+  description String
   participantesEvento ParticipantesEvento[]
-  listados Listados[]
 }
 
 // Definición de la tabla ParticipantesEvento
 model ParticipantesEvento {
   participant_id    Int       @id @default(autoincrement())
   event_id          Int
+  profetion_id      Int 
   participant_name  String
-  participant_role  String
-  participant_status String
-  listados Listados[]
   registroEventos  RegistroEventos @relation(fields: [event_id], references: [event_id])
+  profesion  Profesion @relation(fields: [profetion_id], references: [profetion_id])
+ 
 }
 
-// Definición de la tabla RespuestasIndicadas
-model RespuestasIndicadas {
-  indication_id    Int     @id @default(autoincrement())
-  user_id          Int
-  faq_id           Int
-  indication_date  DateTime
-  usuarios         Usuarios @relation(fields: [user_id], references: [user_id])
-  preguntasFrecuentes PreguntasFrecuentes @relation(fields: [faq_id], references: [faq_id])
-}
 
-// Definición de la tabla Listados
-model Listados {
-  list_id         Int     @id @default(autoincrement())
-  event_id        Int
-  participant_id  Int
-  list_date       DateTime
-  list_status     String
-  registroEventos RegistroEventos @relation(fields: [event_id], references: [event_id])
-  participantesEvento ParticipantesEvento @relation(fields: [participant_id], references: [participant_id])
-}

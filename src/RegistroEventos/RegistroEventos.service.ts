@@ -20,8 +20,9 @@ export class RegistroEventoService {
     }
 
     createRegistroEvento(data: RegistroEventos):Promise<RegistroEventos>{
+        const {event_name,event_location,event_date}=data;
         return this.prisma.registroEventos.create({
-            data
+            data:{event_name,event_location,event_date}
         })
     }
 

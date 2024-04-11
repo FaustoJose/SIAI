@@ -20,8 +20,9 @@ export class PreguntasFrecuenteService {
     }
 
     createPreguntasFrecuente(data: PreguntasFrecuentes):Promise<PreguntasFrecuentes>{
+        const {category_id,answer,question}=data
         return this.prisma.preguntasFrecuentes.create({
-            data
+            data:{category_id,answer,question}
         })
     }
 

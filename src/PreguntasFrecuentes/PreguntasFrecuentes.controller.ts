@@ -15,15 +15,15 @@ export class PreguntasFrecuenteController {
     @Post()
     async createPreguntasFrecuente(@Body() data: PreguntasFrecuentes){
         return this.PreguntasFrecuenteService.createPreguntasFrecuente(data)
-    }
-
+    } 
+    
     @Get(':id')
     async getPreguntasFrecuenteById(@Param('id') id: string ){
         const PreguntasFrecuenteFound = await this.PreguntasFrecuenteService.getPreguntasFrecuenteById(Number(id))
         if (!PreguntasFrecuenteFound) throw new NotFoundException('Esta pregunta no existe.')
         return PreguntasFrecuenteFound
     }
-
+ 
     @Delete(':id')
     async deletePreguntasFrecuente(@Param('id') id: string){
         try{

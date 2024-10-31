@@ -9,8 +9,8 @@ export class ChatController {
         
 
 
-    @Post('talk')
+    @Post()
     async chatGPT(@Body('content') content: string): Promise<any> {
        return this.ChatService.open_ai(content);
-    }
+    } 
 }

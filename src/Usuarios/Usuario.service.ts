@@ -8,7 +8,14 @@ export class UsuarioService {
     constructor(private prisma: PrismaService){}
 
     getAllUsuarios():Promise<Usuarios[]>{
-        return this.prisma.usuarios.findMany()
+        try{
+
+           return this.prisma.usuarios.findMany();
+
+        } catch (error) {
+            console.error('Error geting usuarios:', error);
+            throw new Error('Error geting usuarios');
+        }
     }
 
     getUsuarioById(user_id: number):Promise<Usuarios>{
@@ -16,13 +23,20 @@ export class UsuarioService {
             where:{
                 user_id
             }
-        })
+        });
     }
 
     createUsuario(data: Usuarios):Promise<Usuarios>{
-        return this.prisma.usuarios.create({
-            data
-        })
+        try{
+
+            return this.prisma.usuarios.create({
+                data
+            });
+
+        } catch (error) {
+            console.error('Error creatting usuario:', error);
+            throw new Error('Error creatting usuario');
+        }
     }
 
     updateUsuario(user_id:number,data: Usuarios):Promise<Usuarios>{

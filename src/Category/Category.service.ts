@@ -8,22 +8,40 @@ export class CategoryService {
     constructor(private prisma: PrismaService){}
 
     getAllCategory():Promise<Category[]>{
-        return this.prisma.category.findMany()
+        try{
+
+          return this.prisma.category.findMany();
+
+        } catch (error) {
+            console.error('Error geting category ', error);
+            throw new Error('Error geting category');
+        }
     }
 
     getCategoryById(category_id: number):Promise<Category>{
-        return this.prisma.category.findUnique({
-            where:{
-                category_id
-            }
-        })
+   
+
+            return this.prisma.category.findUnique({
+                where:{
+                    category_id
+                }
+            });
+
+       
     }
 
     createCategory(data: Category):Promise<Category>{
+        try{
+
         const {description} = data
         return this.prisma.category.create({
             data:{description}
-        })
+        });
+
+        } catch (error) {
+            console.error('Error creating category', error);
+            throw new Error('Error geting category');
+        }
     }
 
     updateCategory(category_id:number,data: Category):Promise<Category>{

@@ -30,7 +30,7 @@ export class PreguntasFrecuenteController {
             return await this.PreguntasFrecuenteService.deletePreguntasFrecuente(Number(id))
         }
         catch(error){
-            throw new NotFoundException("Esta pregunta no existe.")
+            throw new NotFoundException("Esta pregunta no existe.") 
         }
         
     }

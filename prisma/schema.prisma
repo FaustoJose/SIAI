@@ -41,7 +41,7 @@ model RegistroEventos {
   event_date     DateTime
   event_location String
   participantesEvento ParticipantesEvento[] 
-  
+  llamadoMensaje LlamadoMensaje[]
 }
 
 model Profesion{
@@ -54,11 +54,28 @@ model Profesion{
 model ParticipantesEvento {
   participant_id    Int       @id @default(autoincrement())
   event_id          Int
+  Img_id            Int
   profetion_id      Int 
   participant_name  String
+  academic_degree    String
   registroEventos  RegistroEventos @relation(fields: [event_id], references: [event_id])
   profesion  Profesion @relation(fields: [profetion_id], references: [profetion_id])
+  imgParticipante ImgParticipante @relation(fields: [Img_id], references: [Img_id])
  
 }
 
-
+model ImgParticipante{
+Img_id    Int       @id @default(autoincrement())
+Img_name  String
+Img_type  String
+participantesEvento ParticipantesEvento[]
+}
+ 
+model LlamadoMensaje{
+Id    Int       @id @default(autoincrement())
+event_id          Int
+Titulo  String
+Text  String
+TipoDiscurso String
+registroEventos  RegistroEventos @relation(fields: [event_id], references: [event_id])
+}

@@ -1,21 +1,16 @@
-import { Injectable } from "@nestjs/common";
-//import { Response } from "@nestjs/common";
-//import { TextToSpeechClient } from '@google-cloud/text-to-speech';
-//import * as say from 'say';
-//import { exec } from 'child_process';
-//import { PrismaService } from "src/prisma/prisma.service";
-//import {Listados} from "@prisma/client"
-
+import { Injectable } from '@nestjs/common';
+import * as path from 'path';
 
 @Injectable()
-export class hablarService {
-
-   
-    Decir(text: string): void {
-        
-      }
-
-
-     
-   
+export class AudioService {
+  getAudioFilePath(): string {
+    try{
+    // Especifica la ruta completa del archivo MP3
+    const audioFilePath = path.join(process.cwd(), 'Audios', 'output.mp3');
+    return audioFilePath;
+  } catch (error) {
+    console.error('Error generating speech:', error);
+    //throw new Error('Error generating speech');
+  }
+  }
 }

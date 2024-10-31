@@ -8,7 +8,14 @@ export class ProfesionService {
     constructor(private prisma: PrismaService){}
 
     getAllProfesion():Promise<Profesion[]>{
-        return this.prisma.profesion.findMany()
+        try{
+
+          return this.prisma.profesion.findMany();
+
+        } catch (error) {
+            console.error('Error geting profesion:', error);
+            throw new Error('Error geting profesion');
+        }
     }
 
     getProfesionById(profetion_id: number):Promise<Profesion>{
@@ -16,14 +23,21 @@ export class ProfesionService {
             where:{
                 profetion_id
             }
-        })
+        });
     }
 
     createProfesion(data: Profesion):Promise<Profesion>{
-        const {description} = data
-        return this.prisma.profesion.create({
-            data:{description}
-        })
+        const {description} = data;
+        try{
+
+            return this.prisma.profesion.create({
+                data:{description}
+            });
+
+        } catch (error) {
+            console.error('Error creating profesion:', error);
+            throw new Error('Error creating profesion');
+        }
     }
 
     updateProfesion(profetion_id:number,data: Profesion):Promise<Profesion>{
@@ -32,7 +46,7 @@ export class ProfesionService {
                 profetion_id
             },
             data
-        })
+        });
     }
 
     deleteProfesion(profetion_id:number):Promise<Profesion>{
@@ -40,6 +54,6 @@ export class ProfesionService {
             where:{
                 profetion_id
             }
-        })
+        });
     }
 }
